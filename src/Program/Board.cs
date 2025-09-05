@@ -6,6 +6,11 @@ public class Board
 {
     private Cell[,] board = BoardImporter();
 
+    public int GetLength(int i)
+    {
+        return board.GetLength(i);
+    }
+    
     public void Change(Cell[,] board)
     {
         Motor nuevo = new Motor();
