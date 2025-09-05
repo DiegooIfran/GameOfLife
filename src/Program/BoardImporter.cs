@@ -1,4 +1,5 @@
 using System.IO;
+using Ucu.Poo.GameOfLife;
 
 namespace Program
 
@@ -7,7 +8,7 @@ namespace Program
     {
         private string _url = "board.txt";
         private string[] _contentLines;
-        private bool[,] _board;
+        public Cell[,] _board;
 
         public BoardImporter()
         {
@@ -16,21 +17,22 @@ namespace Program
             _contentLines = content.Split('\n');
 
             // inicializar tablero
-            _board = new bool[_contentLines.Length, _contentLines[0].Length];
+            _board = new Cell[_contentLines.Length, _contentLines[0].Length];
 
             for (int y = 0; y < _contentLines.Length; y++)
             {
                 for (int x = 0; x < _contentLines[y].Length; x++)
                 {
+                    _board[y, x] = new Cell();
                     if (_contentLines[y][x] == '1')
                     {
-                        _board[y, x] = true;
+                        _board[y, x].Born();
                     }
                 }
             }
         }
 
-        public bool[,] GetBoard()
+        public Cell[,] GetBoard()
         {
             return _board;
         }
