@@ -3,12 +3,12 @@ namespace Ucu.Poo.GameOfLife;
 
 public class Motor
 {
-    public void Generate(Board gameBoard)
+    public Board Generate(Board gameBoard)
     {
         int boardWidth = gameBoard.GetLength(0);
         int boardHeight = gameBoard.GetLength(1);
 
-        Cell[,] cloneboard = new Cell[boardWidth, boardHeight];
+        Board[,] cloneboard = new Board[boardWidth, boardHeight];
         for (int x = 0; x < boardWidth; x++)
         {
             for (int y = 0; y < boardHeight; y++)
@@ -53,6 +53,6 @@ public class Motor
             }
         }
 
-        gameBoard = cloneboard;
+        return cloneboard;
     }
 }
