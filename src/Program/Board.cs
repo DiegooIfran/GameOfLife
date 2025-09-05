@@ -1,13 +1,15 @@
+using Program;
+
 namespace Ucu.Poo.GameOfLife;
 
 public class Board
 {
-    private bool[,] board = Filereader();
+    private Cell[,] board = BoardImporter();
 
-    public bool[,] Change(bool[,] board)
+    public void Change(Cell[,] board)
     {
         Motor nuevo = new Motor();
-        return nuevo.Generate(board);
+        nuevo.Generate(board);
     }
         //=================================================
         //Invocar método para calcular siguiente generación
