@@ -6,7 +6,7 @@ namespace Ucu.Poo.GameOfLife;
 
 public class ConsolePrinter
 {
-    private bool[,] b; //variable que representa el tablero
+    private Cell[,] b; //variable que representa el tablero
     private int width; //variabe que representa el ancho del tablero
     private int height; //variabe que representa altura del tablero
     
@@ -18,7 +18,7 @@ public class ConsolePrinter
         {
             for (int x = 0; x < width; x++)
             {
-                if (b[x, y])
+                if (b[x, y].Alive)
                 {
                     s.Append("|X|");
                 }
