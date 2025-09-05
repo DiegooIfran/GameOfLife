@@ -1,10 +1,12 @@
+using Program;
+
 namespace Ucu.Poo.GameOfLife;
 
 public class Board
 {
-    private bool[,] board = Filereader();
-
-    public bool[,] Change(bool[,] board)
+    private Cell[,] board = BoardImporter();
+    
+    public Cell[,] Change(Cell[,] board)
     {
         Motor nuevo = new Motor();
         return nuevo.Generate(board);
