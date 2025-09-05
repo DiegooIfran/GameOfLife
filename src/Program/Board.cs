@@ -4,17 +4,21 @@ namespace Ucu.Poo.GameOfLife;
 
 public class Board
 {
-    private Cell[,] board = BoardImporter();
+    private Cell[,] board = new Cell[,];
+    public Cell[,] First()
+    {
+        return BoardImporter.GetBoard();
+    }
 
     public int GetLength(int i)
     {
-        return board.GetLength(i);
+        return bo.GetLength(i);
     }
     
-    public void Change(Cell[,] board)
+    public void Change(Cell[,] boar)
     {
         Motor nuevo = new Motor();
-        nuevo.Generate(board);
+        boar = nuevo.Generate(boar);
     }
         //=================================================
         //Invocar método para calcular siguiente generación
