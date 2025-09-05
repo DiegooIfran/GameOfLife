@@ -3,7 +3,7 @@ namespace Ucu.Poo.GameOfLife;
 
 public class Motor
 {
-    public void Generate(board gameBoard)
+    public void Generate(Board gameBoard)
     {
         int boardWidth = gameBoard.GetLength(0);
         int boardHeight = gameBoard.GetLength(1);
