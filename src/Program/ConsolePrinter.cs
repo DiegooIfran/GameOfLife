@@ -10,15 +10,18 @@ public class ConsolePrinter
     private int width; //variabe que representa el ancho del tablero
     private int height; //variabe que representa altura del tablero
     
-    public void PrintBoard()
+    public void PrintBoard(Board board)
     {
+        b = board.GetCells();
+        width = board.GetLength(1);
+        height = board.GetLength(0);
         Console.Clear();
         StringBuilder s = new StringBuilder();
         for (int y = 0; y < height; y++)
         {
             for (int x = 0; x < width; x++)
             {
-                if (b[x, y].Alive)
+                if (b[y, x].Alive)
                 {
                     s.Append("|X|");
                 }
@@ -32,9 +35,6 @@ public class ConsolePrinter
         }
 
         Console.WriteLine(s.ToString());
-        //=================================================
-        //Invocar método para calcular siguiente generación
-        //=================================================
         Thread.Sleep(300);
     }
 }

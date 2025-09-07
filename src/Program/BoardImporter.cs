@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using Ucu.Poo.GameOfLife;
 
 namespace Program
@@ -13,9 +14,15 @@ namespace Program
         public BoardImporter()
         {
             // para leer archivo
-            string content = File.ReadAllText(_url);
-            _contentLines = content.Split('\n');
+            //string content = File.ReadAllText(_url);
+            //_contentLines = content.Split('\n');
+            _contentLines = File.ReadAllText(_url)
+                .Split('\n')
+                .Select(l => l.Trim())   // elimina espacios y \r
+                .Where(l => l.Length > 0) // elimina líneas vacías
+                .ToArray();
 
+            
             // inicializar tablero
             _board = new Cell[_contentLines.Length, _contentLines[0].Length];
 
