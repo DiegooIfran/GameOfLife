@@ -1,13 +1,15 @@
 ﻿
 
+using Program;
+
 namespace Ucu.Poo.GameOfLife
 {
     class Program
-    {
+    {   
         static void Main()
         {
-            Board tablero = new Board(); // Genero el tablero
-            tablero.First(); // Guardo el primer tablero
+            BoardImporter first = new BoardImporter();
+            Board tablero = new Board(first.GetBoard()); // Genero el tablero
             ConsolePrinter printer = new ConsolePrinter(); // Creo el printer
             printer.PrintBoard(tablero); 
             while (true)
