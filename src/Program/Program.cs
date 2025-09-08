@@ -12,7 +12,7 @@ namespace Ucu.Poo.GameOfLife
             printer.PrintBoard(tablero); 
             while (true)
             {
-                tablero.Change(); // Siguiente generacion
+                Motor.Generate(tablero); // Siguiente generacion
                 printer.PrintBoard(tablero); // Printeo la siguiente generacion
             }
         }

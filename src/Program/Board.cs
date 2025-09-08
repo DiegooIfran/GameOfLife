@@ -27,9 +27,4 @@ public class Board // Su razon de cambio es como quieras devolver el tablero, en
         _board = newBoard; // Settea un array de celulas a un board
     }
     
-    public void Change()
-    {
-        Motor motor = new Motor();
-        motor.Generate(this); // Llama a motor para generar la siguiente generacion
-    }
 }

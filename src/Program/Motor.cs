@@ -3,7 +3,7 @@ namespace Ucu.Poo.GameOfLife;
 
 public class Motor
 {
-    public void Generate(Board gameBoard) // Su razon de cambio son las reglas de juego
+    public static void Generate(Board gameBoard) // Su razon de cambio son las reglas de juego
     {
         Cell[,] actualBoard = gameBoard.GetCells(); // Consigo el array de celulas
         int boardWidth = gameBoard.GetLength(0); // Consigo las longitudes

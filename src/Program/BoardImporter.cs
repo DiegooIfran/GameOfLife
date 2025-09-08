@@ -18,7 +18,6 @@ namespace Program
                 .Select(l => l.Trim())   // Elimina espacios y \r
                 .Where(l => l.Length > 0) // Elimina líneas vacías
                 .ToArray(); // Solucion brindada por chatgpt a OutOfRange
-
             
             // Inicializar tablero
             _board = new Cell[_contentLines.Length, _contentLines[0].Length];
