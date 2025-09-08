@@ -6,11 +6,17 @@ namespace Ucu.Poo.GameOfLife;
 public class Board // Su razon de cambio es como quieras devolver el tablero, en este caso array de celulas.
 {
     private Cell[,] _board;
+    
+    public Board(Cell[,] cells)
+    {
+        this._board = cells;
+    }
     public void First() //Metodo usado para generar el primer tablero
     {
         BoardImporter first = new BoardImporter();
         _board = first.GetBoard();
     }
+
 
     public int GetLength(int i) //Devuelve la longitud del array en el eje deseado
     {
