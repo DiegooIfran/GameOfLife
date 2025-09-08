@@ -3,12 +3,15 @@ namespace Ucu.Poo.GameOfLife;
 
 public class Motor
 {
-    public Board Generate(Board gameBoard)
+    public void Generate(Board gameBoard) // Su razon de cambio son las reglas de juego
     {
-        int boardWidth = gameBoard.GetLength(0);
+        Cell[,] actualBoard = gameBoard.GetCells(); // Consigo el array de celulas
+        int boardWidth = gameBoard.GetLength(0); // Consigo las longitudes
         int boardHeight = gameBoard.GetLength(1);
 
-        Board[,] cloneboard = new Board[boardWidth, boardHeight];
+
+        Cell[,] cloneBoard = new Cell[boardWidth, boardHeight];
+
         for (int x = 0; x < boardWidth; x++)
         {
             for (int y = 0; y < boardHeight; y++)
@@ -18,41 +21,44 @@ public class Motor
                 {
                     for (int j = y - 1; j <= y + 1; j++)
                     {
-                        if (i >= 0 && i < boardWidth && j >= 0 && j < boardHeight && gameBoard[i, j].Alive)//COMO CORNO ACCEDO AL ALIVE DE LA CELULA DE UNA POSICION ESPECIFICA DEL TABLERO
+                        if (i >= 0 && i < boardWidth && j >= 0 && j < boardHeight && actualBoard[i, j].Alive)
                         {
                             aliveNeighbors++;
                         }
                     }
                 }
 
-                if (gameBoard[x, y])
+                if (actualBoard[x, y].Alive)
                 {
                     aliveNeighbors--;
                 }
 
-                if (gameBoard[x, y].Alive && aliveNeighbors < 2)
+                if (actualBoard[x, y].Alive && aliveNeighbors < 2)
                 {
                     //Celula muere por baja población
-                    cloneboard[x, y] = gameBoard[x, y].Die;
+                    cloneBoard[x, y] = new Cell();
+                    cloneBoard[x, y].Die();
                 }
-                else if (gameBoard[x, y].Alive && aliveNeighbors > 3)
+                else if (actualBoard[x, y].Alive && aliveNeighbors > 3)
                 {
                     //Celula muere por sobrepoblación
-                    cloneboard[x, y] =  gameBoard[x, y].Die;
+                    cloneBoard[x, y] = new Cell();
+                    cloneBoard[x, y].Die();
                 }
-                else if (!gameBoard[x, y].Alive && aliveNeighbors == 3)
+                else if (!actualBoard[x, y].Alive && aliveNeighbors == 3)
                 {
                     //Celula nace por reproducción
-                    cloneboard[x, y] = gameBoard[x, y].Alive;
+                    cloneBoard[x, y] = new Cell();
+                    cloneBoard[x, y].Born();
                 }
                 else
                 {
                     //Celula mantiene el estado que tenía
-                    cloneboard[x, y] = gameBoard[x, y];
+                    cloneBoard[x, y] = actualBoard[x, y];
                 }
             }
         }
 
-        return cloneboard;
+        gameBoard.SetCells(cloneBoard); // Setteo el gameBoard con el array de celulas de CloneBoard
     }
 }

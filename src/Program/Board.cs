@@ -3,39 +3,33 @@ using Program;
 
 namespace Ucu.Poo.GameOfLife;
 
-public class Board
+public class Board // Su razon de cambio es como quieras devolver el tablero, en este caso array de celulas.
 {
-    public Cell[,] Cells  {get; private set;}
-    private BoardImporter importer = new BoardImporter();
-    private Cell[,] initial = importer.GetBoard();
-
-    public Board(Cell[,] initialBoard)
+    private Cell[,] _board;
+    public void First() //Metodo usado para generar el primer tablero
     {
-        this.Cells = initialBoard;
+        BoardImporter first = new BoardImporter();
+        _board = first.GetBoard();
     }
-    /*
-    public Cell[,] First()
-    {
-        return imported;
-    }
-    */
-    public Board boardVacio()
-    {
-        int boardWidth = initial.GetLength(0);
-        int boardHeight = initial.GetLength(1);
 
-        Board[,] cloneboard = new Board[boardWidth, boardHeight];
-        return cloneboard;
+    public int GetLength(int i) //Devuelve la longitud del array en el eje deseado
+    {
+        return _board.GetLength(i);
     }
     
-    public void Update(Cell[,] gameBoard)
+    public Cell[,] GetCells()
     {
-        Motor nuevo = new Motor();
-        gameBoard = nuevo.Generate(this.Cells);
+        return _board; // Devuelve el array de celulas
     }
-        //=================================================
-        //Invocar método para calcular siguiente generación
-        //Motor nuevo = new Motor();
-        //board = nuevo.generate(board);
-        //=================================================
+    
+    public void SetCells(Cell[,] newBoard)
+    {
+        _board = newBoard; // Settea un array de celulas a un board
+    }
+    
+    public void Change()
+    {
+        Motor motor = new Motor();
+        motor.Generate(this); // Llama a motor para generar la siguiente generacion
+    }
 }
