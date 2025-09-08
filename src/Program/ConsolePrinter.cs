@@ -4,24 +4,24 @@ using System.Threading;
 
 namespace Ucu.Poo.GameOfLife;
 
-public class ConsolePrinter
+public class ConsolePrinter // Su razon de cambio es el formato de impresion
 {
-    private Cell[,] b; //variable que representa el tablero
-    private int width; //variabe que representa el ancho del tablero
-    private int height; //variabe que representa altura del tablero
+    private Cell[,] _b; // Variable que representa el tablero
+    private int _width; // Variabe que representa el ancho del tablero
+    private int _height; // Variabe que representa altura del tablero
     
     public void PrintBoard(Board board)
     {
-        b = board.GetCells();
-        width = board.GetLength(1);
-        height = board.GetLength(0);
+        _b = board.GetCells(); // Consigo el array de celulas
+        _width = board.GetLength(1); // Consigo las longitudes
+        _height = board.GetLength(0);
         Console.Clear();
-        StringBuilder s = new StringBuilder();
-        for (int y = 0; y < height; y++)
+        StringBuilder s = new StringBuilder(); // Creo el string que representara el tablero
+        for (int y = 0; y < _height; y++)
         {
-            for (int x = 0; x < width; x++)
+            for (int x = 0; x < _width; x++)
             {
-                if (b[y, x].Alive)
+                if (_b[y, x].Alive)
                 {
                     s.Append("|X|");
                 }

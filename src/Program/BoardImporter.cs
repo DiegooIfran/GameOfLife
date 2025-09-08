@@ -5,7 +5,7 @@ using Ucu.Poo.GameOfLife;
 namespace Program
 
 {
-    public class BoardImporter
+    public class BoardImporter // Su razon de cambio es la forma de recibir el archivo 
     {
         private string _url = "board.txt";
         private string[] _contentLines;
@@ -13,17 +13,14 @@ namespace Program
 
         public BoardImporter()
         {
-            // para leer archivo
-            //string content = File.ReadAllText(_url);
-            //_contentLines = content.Split('\n');
             _contentLines = File.ReadAllText(_url)
                 .Split('\n')
-                .Select(l => l.Trim())   // elimina espacios y \r
-                .Where(l => l.Length > 0) // elimina líneas vacías
-                .ToArray();
+                .Select(l => l.Trim())   // Elimina espacios y \r
+                .Where(l => l.Length > 0) // Elimina líneas vacías
+                .ToArray(); // Solucion brindada por chatgpt a OutOfRange
 
             
-            // inicializar tablero
+            // Inicializar tablero
             _board = new Cell[_contentLines.Length, _contentLines[0].Length];
 
             for (int y = 0; y < _contentLines.Length; y++)
@@ -41,7 +38,7 @@ namespace Program
 
         public Cell[,] GetBoard()
         {
-            return _board;
+            return _board; // Devuelve el primer tablero
         }
     }
 }
