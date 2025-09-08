@@ -1,41 +1,29 @@
-using System.Dynamic;
-using Program;
-
-namespace Ucu.Poo.GameOfLife;
+namespace Program;
 
 public class Board
 {
     public Cell[,] Cells  {get; private set;}
-    private BoardImporter importer = new BoardImporter();
-    private Cell[,] initial = importer.GetBoard();
+    private BoardImporter importer;
+    private Cell[,] _initial; 
 
     public Board(Cell[,] initialBoard)
     {
         this.Cells = initialBoard;
+        importer = new BoardImporter();
+        _initial = importer.GetBoard();
+        
     }
-    /*
-    public Cell[,] First()
-    {
-        return imported;
-    }
-    */
-    public Board boardVacio()
-    {
-        int boardWidth = initial.GetLength(0);
-        int boardHeight = initial.GetLength(1);
 
-        Board[,] cloneboard = new Board[boardWidth, boardHeight];
-        return cloneboard;
+    public int GetBoardLength(int indice)
+    {
+        int length = this.Cells.GetLength(indice);
+        return length;
     }
     
-    public void Update(Cell[,] gameBoard)
+    public Board Update(Board board)
     {
         Motor nuevo = new Motor();
-        gameBoard = nuevo.Generate(this.Cells);
+        Board boardActualizado = nuevo.Generate(board);
+        return boardActualizado;
     }
-        //=================================================
-        //Invocar método para calcular siguiente generación
-        //Motor nuevo = new Motor();
-        //board = nuevo.generate(board);
-        //=================================================
 }

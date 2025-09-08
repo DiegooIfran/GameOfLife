@@ -1,14 +1,22 @@
-namespace Ucu.Poo.GameOfLife;
+namespace Program;
 
 
 public class Motor
 {
     public Board Generate(Board gameBoard)
     {
-        int boardWidth = gameBoard.GetLength(0);
-        int boardHeight = gameBoard.GetLength(1);
+        int boardWidth = gameBoard.GetBoardLength(0);
+        int boardHeight = gameBoard.GetBoardLength(1);
 
-        Board[,] cloneboard = new Board[boardWidth, boardHeight];
+        Cell[,] newCells = new Cell[boardWidth, boardHeight];
+        for (int x = 0; x < boardHeight; x++)
+        {
+            for (int y = 0; y < boardWidth; y++)
+            {
+                newCells[x, y] = new Cell(); // Crear nuevas instancias de Cell
+            }
+        }
+        Board cloneboard = new Board(newCells);
         for (int x = 0; x < boardWidth; x++)
         {
             for (int y = 0; y < boardHeight; y++)
@@ -18,41 +26,38 @@ public class Motor
                 {
                     for (int j = y - 1; j <= y + 1; j++)
                     {
-                        if (i >= 0 && i < boardWidth && j >= 0 && j < boardHeight && gameBoard[i, j].Alive)//COMO CORNO ACCEDO AL ALIVE DE LA CELULA DE UNA POSICION ESPECIFICA DEL TABLERO
+                        if (i >= 0 && i < boardWidth && j >= 0 && j < boardHeight && gameBoard.Cells[i, j].Alive)
                         {
                             aliveNeighbors++;
                         }
                     }
                 }
-
-                if (gameBoard[x, y])
+                if (gameBoard.Cells[x, y].Alive)
                 {
                     aliveNeighbors--;
                 }
-
-                if (gameBoard[x, y].Alive && aliveNeighbors < 2)
+                if (gameBoard.Cells[x, y].Alive && aliveNeighbors < 2)
                 {
                     //Celula muere por baja población
-                    cloneboard[x, y] = gameBoard[x, y].Die;
+                    cloneboard.Cells[x, y].Die();
                 }
-                else if (gameBoard[x, y].Alive && aliveNeighbors > 3)
+                else if (gameBoard.Cells[x, y].Alive && aliveNeighbors > 3)
                 {
                     //Celula muere por sobrepoblación
-                    cloneboard[x, y] =  gameBoard[x, y].Die;
+                    cloneboard.Cells[x, y].Die();
                 }
-                else if (!gameBoard[x, y].Alive && aliveNeighbors == 3)
+                else if (!gameBoard.Cells[x, y].Alive && aliveNeighbors == 3)
                 {
                     //Celula nace por reproducción
-                    cloneboard[x, y] = gameBoard[x, y].Alive;
+                    cloneboard.Cells[x, y].Born();
                 }
                 else
                 {
                     //Celula mantiene el estado que tenía
-                    cloneboard[x, y] = gameBoard[x, y];
+                    cloneboard.Cells[x, y].Alive = gameBoard.Cells[x, y].Alive;
                 }
             }
         }
-
         return cloneboard;
     }
 }

@@ -1,6 +1,4 @@
-using System.Net.Http.Headers;
-
-namespace Ucu.Poo.GameOfLife;
+namespace Program;
 
 public class Cell
 {
